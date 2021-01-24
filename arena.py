@@ -112,7 +112,7 @@ def check_valid_return_value(self, return_val):
             # rotate - DO not go forward
             return_val = 'R'
 
-    self.logger.info('X %s ,Y %s, dir %s, Arena %s', self.my_player.x, self.my_player.y, return_val, Arena.dimensions)
+    #self.logger.info('X %s ,Y %s, dir %s, Arena %s', self.my_player.x, self.my_player.y, return_val, Arena.dimensions)
     
     return return_val
 
