@@ -55,8 +55,8 @@ class Arena:
         #cp = 'closest neighbour : %s,%s' % (cp_x,cp_y)
 
         #self.logger.debug(cp)
-        me = 'ME : %s, XY : %s%s, CN : %s' % (self.my_player.direction , self.my_player.x, self.my_player.y, closest_player_location)
-        more = ' Them : dist %s, %s, XY : %s%s, deg : %s' % (distance, cardinal_dir, cp_x,cp_y, degree)
+        me = ' ME : %s, XY : %s%s, ' % (self.my_player.direction , self.my_player.x, self.my_player.y)
+        more = ' Them : dist %s, %s, CN_XY : %s%s, deg : %s' % (distance, cardinal_dir, cp_x,cp_y, degree)
 
         self.logger.info(me  + more)
 
