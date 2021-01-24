@@ -49,12 +49,14 @@ class Arena:
         
         distance, closest_player_location = find_index_of_nearest_co(coordinates,my_location)
         cardinal_dir, degree = direction_lookup(closest_player_location[0], self.my_player.x, closest_player_location[1], self.my_player.y)
-        #cp = 'closest neighbour : %s' % (closest_player_location)
+        cp = 'closest neighbour : %s' % (closest_player_location)
         #self.logger.debug(cp)
-        me = 'Me : %s, x : %s, y : %s' % (self.my_player.direction , self.my_player.x, self.my_player.y)
-        more = 'Them : dist %s, %s, x : %s, y : %s, deg : %s' % (distance, cardinal_dir, closest_player_location[0],closest_player_location[1], degree)
+        me = 'ME : %s, XY : %s%s, CN : %s' % (self.my_player.direction , self.my_player.x, self.my_player.y, closest_player_location)
+        more = ' Them : dist %s, %s, XY : %s%s, deg : %s' % (distance, cardinal_dir, closest_player_location[0],closest_player_location[1], degree)
 
-        self.logger.info(me + more)
+        self.logger.info(me  + more)
+
+
         return_val =  check_valid_return_value(self,'F') 
         if distance <= 3 and self.my_player.direction == cardinal_dir :
             self.logger.info('throwing because distance is one and I am facing opponent')
