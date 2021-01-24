@@ -22,7 +22,7 @@ class Arena:
         
         self.players = []
         for i, (k, v) in enumerate(self.state.items()):
-            print(k)
+            #print(k)
             if k == my_url :
                 self.my_player = Player(k,v)
             else:
@@ -128,8 +128,8 @@ def direction_lookup(origin_x, destination_x, origin_y, destination_y ):
     compass_brackets = ["N", "E", "S", "W", "N"]
     compass_lookup = round(degrees_final / 90)
     rounded_degrees = round(degrees_final / 90) * 90
-    print(compass_brackets[compass_lookup])
-    print(rounded_degrees)
+    #print(compass_brackets[compass_lookup])
+    #print(rounded_degrees)
     return compass_brackets[compass_lookup], rounded_degrees
 
 
