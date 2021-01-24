@@ -1,8 +1,0 @@
-curl -X POST -H "Content-Type: application/json" -d sample.json http://localhost:8082/game
-
-
-curl -X POST -H "Content-Type: application/json" -d @sample.json https://cloudrungame-evmxeerhaq-ts.a.run.app/game
-
-curl -X POST -H "Content-Type: application/json" -d @sample2.json http://127.0.0.1:5000/game
-
-curl -d $line -H "Content-Type: application/json" -X POST -w "\n" http://127.0.0.1:5000/game
