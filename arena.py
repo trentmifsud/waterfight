@@ -49,10 +49,14 @@ class Arena:
         
         distance, closest_player_location = find_index_of_nearest_co(coordinates,my_location)
         cardinal_dir, degree = direction_lookup(closest_player_location[0], self.my_player.x, closest_player_location[1], self.my_player.y)
-        cp = 'closest neighbour : %s' % (str(closest_player_location))
+        
+        cp_x = str(closest_player_location[0]-1)
+        cp_y = str(closest_player_location[1]-1)
+        #cp = 'closest neighbour : %s,%s' % (cp_x,cp_y)
+
         #self.logger.debug(cp)
         me = 'ME : %s, XY : %s%s, CN : %s' % (self.my_player.direction , self.my_player.x, self.my_player.y, closest_player_location)
-        more = ' Them : dist %s, %s, XY : %s%s, deg : %s' % (distance, cardinal_dir, closest_player_location[0],closest_player_location[1], degree)
+        more = ' Them : dist %s, %s, XY : %s%s, deg : %s' % (distance, cardinal_dir, cp_x,cp_y, degree)
 
         self.logger.info(me  + more)
 
