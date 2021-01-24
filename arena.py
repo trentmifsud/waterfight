@@ -50,8 +50,8 @@ class Arena:
         distance, closest_player_location = find_index_of_nearest_co(coordinates,my_location)
         cardinal_dir, degree = direction_lookup(closest_player_location[0], self.my_player.x, closest_player_location[1], self.my_player.y)
         
-        cp_x = str(closest_player_location[0]-1)
-        cp_y = str(closest_player_location[1]-1)
+        cp_x = str(closest_player_location[0])
+        cp_y = str(closest_player_location[1])
         #cp = 'closest neighbour : %s,%s' % (cp_x,cp_y)
 
         #self.logger.debug(cp)
