@@ -48,7 +48,8 @@ class Arena:
         my_location = [(self.my_player.x,self.my_player.y)]
         
         distance, closest_player_location = find_index_of_nearest_co(coordinates,my_location)
-        cardinal_dir, degree = direction_lookup(closest_player_location[0], self.my_player.x, closest_player_location[1], self.my_player.y)
+        #cardinal_dir, degree = direction_lookup(closest_player_location[0], self.my_player.x, closest_player_location[1], self.my_player.y)
+        cardinal_dir, degree = direction_lookup(self.my_player.x, closest_player_location[0], self.my_player.y, closest_player_location[1])
         
         cp_x = str(closest_player_location[0])
         cp_y = str(closest_player_location[1])
@@ -69,17 +70,15 @@ class Arena:
             #facing correct way, just move towards them
             self.logger.info('moving towards opponent because I am facing them')
             return_val =  check_valid_return_value(self,'F') 
-        elif distance > 4 and self.my_player.direction != cardinal_dir :
+        elif self.my_player.direction != cardinal_dir :
             #rotate towards player using cardinal_dir
-            self.logger.info('rotating towards opponent as I am not close or facing them')
+            self.logger.info('rotating towards opponent as I am not facing them')
             if degree == 90 or degree == 360 or degree == 0:
                 return_val =  'R'
             elif degree == 180:
                 return_val =  'R'  #we need to turn
             elif degree >= 270:
                 return_val =  'L'
-            #elif degree == 0 :
-            #    return_val =  check_valid_return_value(self,'F') 
             else:
                 return_val = default_move
 
