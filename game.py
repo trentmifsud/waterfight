@@ -4,29 +4,47 @@ from scipy import spatial
 import math
 import logging
 import os
+from player import Player
+from  game_state import Game_State
+from game_intelligence import Game_Intelligence
 
 moves = ['F', 'T', 'L', 'R']
 default_move = moves[1]
 
-class Arena:
-    dimensions = []
+class Game:
 
-    def __init__(self, dimensions, state, my_url):
+    def __init__(self, game_data, db):
         
         logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
         self.logger = logging.getLogger(__name__)
+        self.db = db
 
-        Arena.dimensions = dimensions
-        self.state = state
-        self.my_url = my_url
+        self.links = game_data["_links"]
+        self.my_url = self.links['self']['href']
+        self.arena = game_data["arena"]
+        
+        self.dimensions = self.arena['dims']
+        self.state = self.arena['state'] 
+        # get past 10 records.
+
+        self.historic_state = db.get_data_firestore()
+        self.game_intelligence = Game_Intelligence(self.historic_state)
+
+        postiive = ('Am I scoring positively : %s ' % self.game_intelligence.am_I_scoring_positively())
+        winning = ('Am I winning %s : ' % self.game_intelligence.am_I_winning())
+        camped = ('Am I being camped %s : ' % self.game_intelligence.am_I_being_camped())
+        self.logger.info(postiive  + ' ' + winning + ' ' + camped)
+
         
         self.players = []
         for i, (k, v) in enumerate(self.state.items()):
             #print(k)
-            if k == my_url :
+            if k == self.my_url :
                 self.my_player = Player(k,v)
             else:
                 self.players.append(Player(k,v))
+        
+        self.game_state = Game_State(self.my_player, self.players, self.dimensions, self.db)
         
 
     def get_dims(self):
@@ -137,15 +155,3 @@ def direction_lookup(origin_x, destination_x, origin_y, destination_y ):
     #print(rounded_degrees)
     return compass_brackets[compass_lookup], rounded_degrees
 
-
-class Player:
-    def __init__(self, url, details):
-        self.url = url
-        self.details = details
-        self.x = details['x']
-        self.y = details['y']
-        self.direction = details['direction']
-        self.wasHit = details['wasHit']
-        self.score = details['score']
-        
-    

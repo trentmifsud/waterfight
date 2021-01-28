@@ -34,6 +34,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 #RUN chmod 444 app.py
 
+ENV AM_I_IN_A_DOCKER_CONTAINER Yes
 
 
 # Run the web service on container startup. Here we use the gunicorn

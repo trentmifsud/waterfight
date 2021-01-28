@@ -1,0 +1,12 @@
+
+FireStore
+- variables - records to keep
+
+- if records to keep > 10 - delete first record (roll records)
+- Save incoming data
+- 
+
+questions
+- who is camping?
+- who is winning?
+- who moves a lot (avoid)

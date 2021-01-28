@@ -4,7 +4,8 @@ import random
 from flask import Flask, request, jsonify
 import json
 import numpy
-from arena import *
+from game import *
+from db import Db
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
@@ -17,10 +18,8 @@ def handlegame():
         jsonData = request.get_json()
         game_data = json.loads(json.dumps(jsonData))
         logger.info(game_data)
-        links = game_data["_links"]
-        my_url = links['self']['href']
-        arena = game_data["arena"]
-        play_arena = Arena(arena['dims'], arena['state'], my_url)
+        db = Db(game_data)
+        play_arena = Game(game_data, db)
         return play_arena.get_next_move()
     except Exception as err:
         print(err)
