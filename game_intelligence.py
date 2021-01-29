@@ -50,8 +50,8 @@ class Game_Intelligence(object):
                 #print(k)
                 if k == self.my_url and self.my_player == None:
                     self.my_player = Player(k,v)
-                else:
-                    self.this_round_players.append(Player(k,v))
+
+                self.this_round_players.append(Player(k,v))
             
             self.all_players.append(self.this_round_players.copy())
             self.this_round_players.clear()
@@ -102,16 +102,20 @@ class Game_Intelligence(object):
             my_y = -1
             for player in players:
                 if player.url == self.my_url :
-                    my_x == player.x
-                    my_y == player.y
+                    my_x = player.x
+                    my_y = player.y
+                    pass
             for player in players:
                 if player.url != self.my_url :
                     res = abs(my_x-player.x+my_y-player.y)
                     if abs(my_x-player.x+my_y-player.y) == 1:
-                        camping_counter[player.url] += 1
-        
-        for i, k in enumerate(camping_counter):
-            if k >= camping_threshold-1 :
+                        if camping_counter.get(player.url):
+                            camping_counter[player.url] += 1
+                        else:
+                            camping_counter[player.url] = 1
+
+        for (v, k) in enumerate(camping_counter):
+            if v >= self.camping_threshold-1 :
                 print("camping : " + k)
                 return True
 
